@@ -1,0 +1,48 @@
+# depslib dependency file v1.0
+1326227248 source:/home/david/Development/mmorpg/main.cpp
+	<string>
+	<iostream>
+	<luabind/adopt_policy.hpp>
+	"objects.hpp"
+
+1326227896 /home/david/Development/mmorpg/objects.hpp
+	<string>
+	<algorithm>
+	<functional>
+	<map>
+	<ctime>
+	<lua.hpp>
+	<luabind/luabind.hpp>
+	<luabind/operator.hpp>
+
+1103763184 /usr/include/lua5.1/lua.hpp
+	"lua.h"
+	"lualib.h"
+	"lauxlib.h"
+
+1218029412 /usr/include/lua5.1/lua.h
+	<stdarg.h>
+	<stddef.h>
+	"luaconf.h"
+
+1311766093 /usr/include/lua5.1/luaconf.h
+	<limits.h>
+	<stddef.h>
+	<unistd.h>
+	<io.h>
+	<stdio.h>
+	<stdio.h>
+	<readline/readline.h>
+	<readline/history.h>
+	<assert.h>
+	<math.h>
+	<unistd.h>
+
+1198760545 /usr/include/lua5.1/lualib.h
+	"lua.h"
+
+1198760545 /usr/include/lua5.1/lauxlib.h
+	<stddef.h>
+	<stdio.h>
+	"lua.h"
+

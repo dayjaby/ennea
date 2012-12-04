@@ -1,0 +1,415 @@
+#include <string>
+#include <algorithm>
+#include <functional>
+#include <map>
+#include <ctime>
+#include <lua.hpp>
+#include <luabind/luabind.hpp>
+#include <luabind/operator.hpp>
+
+using namespace std;
+
+
+
+
+struct Stat
+{
+	int current, max;
+	int exp, exp_required;
+	Stat() : current(1), max(1), exp(0), exp_required(80) {}
+	Stat(int c) : current(c), max(c), exp(0), exp_required(80) {}
+	Stat(int c, int m) : current(c), max(m), exp(0), exp_required(80) {}
+	void increase(int amount) {
+		current += amount;
+		if(current>max+5) current = max+5;
+	}
+	void recover() {
+		if(current>max) current--;
+		if(current<max) current++;
+	}
+
+	template <class T>
+	int learn(int amount, std::string skillname, T& obj) {
+		if(amount<1) return 0;
+		exp += amount;
+		obj.onGainExp(skillname,amount);
+		int x = max;
+		while(exp > exp_required) {
+			max++;
+			current++;
+			exp -= exp_required;
+			exp_required = (int) (exp_required * 1.1);
+			obj.onLevelup(skillname,max);
+		}
+		return max-x;
+	}
+};
+
+template <class T>
+class Comparable
+{
+public:
+    Comparable(T v) : value(v) {}
+    T value;
+    bool operator==(const Comparable& c) const {
+        return value == c.value;
+    }
+
+    bool operator<(const Comparable& c) const {
+        return value < c.value;
+    }
+};
+
+class DamageType : public Comparable<int>{
+public:
+    static DamageType Physical() { return DamageType(0); }
+    static DamageType Fire() { return DamageType(1); }
+    static DamageType Poison() { return DamageType(2); }
+    static DamageType Ice() { return DamageType(3); }
+    std::string name() {
+    	switch(value) {
+		case 0: return "Physical";
+		case 1: return "Fire";
+		case 2: return "Poison";
+		case 3: return "Ice";
+		default: return "Unknown";
+        }
+    }
+
+private:
+    DamageType(int i) : Comparable(i) {}
+};
+
+
+class Object;
+
+struct Ability
+{
+    Ability() : selfCastAllowed(false), friendlyCastAllowed(false) {}
+    virtual ~Ability() { std::cout << "Ability destroyed" << std::endl; }
+	virtual void onCast(Object* caster, Object* victim) {}
+	bool selfCastAllowed, friendlyCastAllowed;
+};
+
+struct AbilityWrapper : Ability, luabind::wrap_base
+{
+    virtual void onCast(Object* caster, Object* victim) {
+        call<void>("onCast", caster, victim);
+    }
+    static void default_onCast(Ability* ptr, Object* caster, Object* victim) {
+        ptr->Ability::onCast(caster, victim);
+    }
+};
+
+class Action
+{
+public:
+	// -1 = nothing, 0 = walk, 1 = sitdown, 2 = use ability, 3 = attack
+	int id;
+
+	/* id = 0: 0 = left, 1 = top, 2 = right, 3 = bottom
+		 id = 1: 0 = sitdown, 1 = situp
+		 id = 2: charge (0-100)
+		 id = 3: ...
+	*/
+	int info;
+	Ability* ability;
+	Object* victim;
+};
+
+class Buff
+{
+public:
+    Buff()
+    : ds(0), stacks(1), visible(true), permanent(true), maxStacks(1)
+    {
+    }
+    virtual ~Buff() {
+        std::cout << "Buff destroyed" << std::endl;
+    }
+	bool permanent;
+	bool visible;
+	int maxStacks;
+	int timeLeft; // *0.1 seconds
+	int stacks;
+	int effectCooldown;
+	void end() { timeLeft = 0; }
+	virtual int getID() { return 0; }
+	virtual void onEffectStart(Object* carry) {}
+	void onEffect(Object* carry, int delta_ds) {
+		ds += delta_ds;
+		while(ds >= effectCooldown) {
+			ds -= effectCooldown;
+			onEffect(carry);
+		}
+	}
+	virtual void onEffect(Object* carry) {}
+	virtual void onEffectEnd(Object* carry) { std::cout << "buff ends" << std::endl; }
+	virtual void onFullStacked(Object* carry) {}
+private:
+	int ds;
+};
+
+struct BuffWrapper : Buff, luabind::wrap_base
+{
+    virtual int getID() { return call<int>("getID"); }
+    static int default_getID(Buff* ptr) { return ptr->Buff::getID(); }
+    virtual void onEffectStart(Object* carry) { call<void>("onEffectStart",carry); }
+    static void default_onEffectStart(Buff* ptr, Object* carry) { ptr->Buff::onEffectStart(carry); }
+    virtual void onEffect(Object* carry) { call<void>("onEffect",carry); }
+    static void default_onEffect(Buff* ptr, Object* carry) { ptr->Buff::onEffect(carry); }
+    virtual void onEffectEnd(Object* carry) { call<void>("onEffectEnd",carry); }
+    static void default_onEffectEnd(Buff* ptr, Object* carry) { ptr->Buff::onEffectEnd(carry); }
+    virtual void onFullStacked(Object* carry) { call<void>("onFullStacked",carry); }
+    static void default_onFullStacked(Buff* ptr, Object* carry) { ptr->Buff::onFullStacked(carry); }
+};
+
+class Object
+{
+public:
+	Object() : lastUpdate(clock()), actionEnd(clock()) {}
+	virtual ~Object() {
+	    std::cout << name << " deleted" << std::endl;
+		for(Buffs::iterator i = buffs.begin() ; i != buffs.end() ; ++i) {
+		    delete(i->second);
+		}
+	}
+	std::string name;
+	Stat hp;
+	Action currentAction;
+	clock_t actionEnd;
+	time_t lastUpdate;
+
+	Stat strength;
+	// damage = (base damage - trunc(resistance / 10)) * (resistance / (resistance + 100))
+
+	Stat getResistance(DamageType type) {
+	    return resistance[type];
+	}
+
+	Stat setResistance(DamageType type, Stat stat) {
+	    resistance[type] = stat;
+	}
+
+	void applyBuff(Buff* buff_) {
+	    Buff* buff = new Buff(*buff_);
+		Buffs::iterator i = buffs.find(buff->getID());
+		if(i != buffs.end()) {
+			// Found, refresh the old buff and add one stack if necessary
+			buff->stacks = i->second->stacks + 1;
+			delete(i->second);
+			buffs.erase(i);
+		}
+		buffs[buff->getID()] = buff;
+		buff->onEffectStart(this);
+		if(buff->stacks >= buff->maxStacks) {
+			buff->stacks = buff->maxStacks;
+			buff->onFullStacked(this);
+		}
+	}
+
+	void update() {
+		clock_t current = clock();
+		int diff = (current-lastUpdate)*10 / CLOCKS_PER_SEC;
+		if(diff) {
+            for(Buffs::iterator i = buffs.begin(); i != buffs.end(); ++i) {
+                Buff* buff = i->second;
+                buff->timeLeft -= diff;
+                std::cout << buff->timeLeft << std::endl;
+                if(buff->timeLeft > 0) {
+                    buff->onEffect(this, diff);
+                } else {
+                    buff->onEffectEnd(this);
+                   // delete(i->second);
+                    buffs.erase(i);
+                }
+            }
+            lastUpdate = current;
+		}
+
+	}
+
+	void damage(DamageType type, int amount) {
+		resistance[type].learn(amount, type.name()+" resistance", *this);
+		int res = resistance[type].current;
+		int true_damage = (amount - res/10) * (100 - res * 100 / (res + 100)) / 100;
+		if(true_damage>0) {
+			hp.increase(-true_damage);
+			onDamage(type, true_damage);
+			if(!isAlive()) onDeath();
+		}
+	}
+
+	virtual void onDamage(DamageType type, int amount) {}
+	// what happens when hp drops below 0
+	virtual void onDeath() {}
+
+	bool isAlive() { return hp.current>0; }
+
+	void recover() {
+		hp.recover();
+		for(Resistances::iterator i = resistance.begin() ; i != resistance.end() ; i++)
+            i->second.recover();
+	}
+	void performAction() {
+	    if(clock()>actionEnd) {
+            switch(currentAction.id) {
+                case 2:
+                    currentAction.ability->onCast(this,currentAction.victim);
+                    actionEnd = clock() + 1.5 * CLOCKS_PER_SEC;
+                    currentAction.id = -1;
+                    break;
+                case 3:
+                    currentAction.victim->damage(DamageType::Physical(),strength.current);
+                    actionEnd = clock() + 1.2 * CLOCKS_PER_SEC;
+                    break;
+                default:
+                    break;
+            }
+		}
+	}
+
+    virtual void onGainExp(std::string skillname, int amount) {}
+	virtual void onLevelup(std::string skillname, int lvl) {}
+
+//private:
+    typedef map<DamageType,Stat> Resistances;
+	typedef map<int,Buff*> Buffs;
+	Resistances resistance;
+	Buffs buffs;
+};
+
+struct ObjectWrapper : Object, luabind::wrap_base
+{
+    virtual void onDamage(DamageType type, int amount) {
+        call<void>("onDamage", type, amount);
+    }
+    static void default_onDamage(Object* ptr, DamageType type, int amount) {
+        ptr->Object::onDamage(type,amount);
+    }
+    virtual void onDeath() {
+        call<void>("onDeath");
+    }
+    static void default_onDeath(Object* ptr) {
+        ptr->Object::onDeath();
+    }
+    virtual void onGainExp(std::string skillname, int amount) {
+        call<void>("onGainExp", skillname, amount);
+    }
+    static void default_onGainExp(Object* ptr, std::string skillname, int amount) {
+        ptr->Object::onGainExp(skillname, amount);
+    }
+    virtual void onLevelup(std::string skillname, int amount) {
+        call<void>("onLevelup", skillname, amount);
+    }
+    static void default_onLevelup(Object* ptr, std::string skillname, int amount) {
+        ptr->Object::onLevelup(skillname, amount);
+    }
+};
+
+
+extern "C" int init(lua_State* L) {
+    using namespace luabind;
+    open(L);
+
+
+
+    module(L)
+    [
+        class_<DamageType>("DamageType")
+            .scope
+            [
+                def("Physical", &DamageType::Physical),
+                def("Fire", &DamageType::Fire),
+                def("Poison", &DamageType::Poison),
+                def("Ice", &DamageType::Ice)
+            ]
+            .def("name", &DamageType::name)
+            .def(const_self == other<DamageType>())
+            .def(const_self < other<DamageType>())
+        , class_<Buff, BuffWrapper>("Buff")
+            .def(constructor<>())
+            .def_readwrite("visible", &Buff::visible)
+            .def_readwrite("permanent", &Buff::permanent)
+            .def_readwrite("maxStacks", &Buff::maxStacks)
+            .def_readwrite("timeLeft", &Buff::timeLeft)
+            .def_readwrite("stacks", &Buff::stacks)
+            .def_readwrite("effectCooldown", &Buff::effectCooldown)
+            .def("end", &Buff::end)
+            .def("getID", &Buff::getID, &BuffWrapper::default_getID)
+            .def("onEffectStart", &Buff::onEffectStart, &BuffWrapper::default_onEffectStart)
+            .def("onEffect", (void(Buff::*)(Object*))&Buff::onEffect, &BuffWrapper::default_onEffect)
+            .def("onEffectEnd", &Buff::onEffectEnd, &BuffWrapper::default_onEffectEnd)
+            .def("onFullStacked", &Buff::onFullStacked, &BuffWrapper::default_onFullStacked)
+        , class_<Ability, AbilityWrapper>("Ability")
+            .def(constructor<>())
+            .def("onCast", &Ability::onCast, &AbilityWrapper::default_onCast)
+            .def_readwrite("selfCastAllowed", &Ability::selfCastAllowed)
+            .def_readwrite("friendlyCastAllowed", &Ability::friendlyCastAllowed)
+        , class_<Action>("Action")
+            .def_readwrite("id", &Action::id)
+            .def_readwrite("info", &Action::info)
+            .def_readwrite("ability", &Action::ability)
+            .def_readwrite("victim", &Action::victim)
+            .enum_("actionIDs")
+            [
+                value("nothing", -1),
+                value("walk", 0),
+                value("sitdown", 1),
+                value("ability", 2),
+                value("attack", 3)
+            ]
+        , class_<Stat>("Stat")
+            .def(constructor<>())
+            .def(constructor<int>())
+            .def(constructor<int,int>())
+            .def_readwrite("current", &Stat::current)
+            .def_readwrite("max", &Stat::max)
+            .def_readwrite("exp", &Stat::exp)
+            .def_readwrite("exp_required", &Stat::exp_required)
+            .def("increase", &Stat::increase)
+            .def("recover", &Stat::recover)
+            .def("learn", &Stat::learn<Object>)
+        , class_<Object, ObjectWrapper>("Object")
+            .def(constructor<>())
+            .def("getResistance", &Object::getResistance)
+            .def("setResistance", &Object::setResistance)
+            .def("applyBuff", &Object::applyBuff)
+            .def("isAlive", &Object::isAlive)
+            .def("onDeath", &Object::onDeath, &ObjectWrapper::default_onDeath)
+            .def("onDamage", &Object::onDamage, &ObjectWrapper::default_onDamage)
+            .def("onGainExp", &Object::onGainExp, &ObjectWrapper::default_onGainExp)
+            .def("onLevelup", &Object::onLevelup, &ObjectWrapper::default_onLevelup)
+            .def("damage", &Object::damage)
+            .def_readwrite("name", &Object::name)
+            .def_readwrite("hp", &Object::hp)
+            .def_readwrite("strength", &Object::strength)
+    ];
+    return 0;
+}
+
+
+/*
+// LUA
+
+class 'container' (Object)
+
+function container:__init(item)
+	Object.__init()
+	self.item = item
+end
+
+function container:__onDeath()
+	World.spawn(self.item, self.getLocation())
+end
+
+class 'living' (Object)
+
+function living:__init()
+	Object.__init()
+end
+
+function living:updateStats()
+
+end
+*/

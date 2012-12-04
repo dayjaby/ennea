@@ -1,0 +1,40 @@
+
+#include <string>
+#include <iostream>
+
+#include "objects.hpp"
+
+int main() {
+	std::string cmd;
+	LivingObject warrior;
+	warrior.name = "Prince Harald IV.";
+	warrior.hp = Stat(99);
+	warrior.strength = Stat(20);
+	warrior.resistance[physical] = Stat(10);
+	
+	LivingObject bear;
+	bear.name = "Grizzly bear";
+	bear.hp = Stat(200);
+	bear.strength = Stat(10);
+	bear.resistance[physical] = Stat(15);
+	
+	bear.currentAction.id = 3;
+	bear.currentAction.victim = &warrior;
+	
+	Hardstrike hardstrike;
+	
+	
+	while(cmd!="quit" && warrior.isAlive() && bear.isAlive()) {
+		std::cin >> cmd;
+		if(cmd == "attack") {
+			warrior.currentAction.id = 3;
+			warrior.currentAction.victim = &bear;
+		} else if(cmd == "cast") {
+			warrior.currentAction.id = 2;
+			warrior.currentAction.ability = &hardstrike;
+			warrior.currentAction.victim = &bear;
+		}
+		warrior.performAction();
+		bear.performAction();
+	}
+}

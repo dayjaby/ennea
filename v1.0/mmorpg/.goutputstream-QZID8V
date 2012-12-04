@@ -1,0 +1,50 @@
+class 'LivingObject' (Object)
+
+function LivingObject:__init()
+    Object.__init(self)
+end
+
+function LivingObject:onDeath()
+    print(self.name .. " is defeated")
+end
+
+class 'SimplePoisonBuff' (Buff)
+
+function SimplePoisonBuff:__init(dot)
+    Buff.__init(self)
+    self.timeLeft = 60
+    self.effectCooldown = 10
+    self.dot = dot
+end
+
+function SimplePoisonBuff:onEffect(carry)
+    carry:damage(DamageType.Poison(), self.dot)
+end
+
+class 'Poison' (Ability)
+
+function Poison:__init()
+    Ability.__init(self)
+end
+
+function Poison:onCast(caster, victim)
+    victim:applyBuff(SimplePoisonBuff(10))
+end
+
+poison = Poison()
+
+warrior = LivingObject()
+warrior.name = "Prince Harald IV."
+warrior.hp = Stat(99)
+warrior.strength = Stat(20)
+warrior:setResistance(DamageType.Physical(),Stat(10))
+
+bear = LivingObject()
+bear.name = "Grizzly bear"
+bear.hp = Stat(50);
+bear.strength = Stat(10);
+bear:setResistance(DamageType.Physical(), Stat(15))
+bear:setResistance(DamageType.Poison(), Stat(5))
+
+
+

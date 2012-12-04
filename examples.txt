@@ -1,0 +1,35 @@
+/// Simple pathfinding example
+
+using namespace luabind;
+LuaManager lua;
+try {
+    Player o("Player");
+    Map map(3,3);
+    o.setPosition(Position(0,0,&map));
+    Tile& t = map.getTile(2,0);
+    std::cout << t.getPosition() << std::endl;
+    map.getTile(1,0).type = TileType::Rock();
+    map.getTile(1,1).type = TileType::Rock();
+    int j;
+    while(j!=6) {
+        OptionList al = t.getOptionList(&o);
+        for(int i=0;i<al.options.size();++i){
+            std::cout << i << ": " << al.options[i]->getDescription() << std::endl;
+        }
+        std::cin >> j;
+        if(j>=0 && j<al.options.size()) {
+            al.options[j]->onChoose(&o);
+        }
+    }
+    while(o.getActionScheduleSize()>0) {
+        o.updateActionSchedule();
+    }
+} catch (cast_failed& e) {
+    std::cout << "Info:" << e.info().name() << std::endl;
+    std::cout << "What:" << e.what() << std::endl;
+} catch (error& e) {
+    object error_msg(from_stack(e.state(),-1));
+    std::cout << error_msg << std::endl;
+} catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+}

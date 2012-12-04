@@ -1,0 +1,183 @@
+# depslib dependency file v1.0
+1329913704 source:/home/david/Development/mmorpg/main.cpp
+	<string>
+	<iostream>
+	<boost/ref.hpp>
+	"gui.hpp"
+
+1326227896 /home/david/Development/mmorpg/objects.hpp
+	<string>
+	<algorithm>
+	<functional>
+	<map>
+	<ctime>
+	<lua.hpp>
+	<luabind/luabind.hpp>
+	<luabind/operator.hpp>
+
+1103763184 /usr/include/lua5.1/lua.hpp
+	"lua.h"
+	"lualib.h"
+	"lauxlib.h"
+
+1218029412 /usr/include/lua5.1/lua.h
+	<stdarg.h>
+	<stddef.h>
+	"luaconf.h"
+
+1311766093 /usr/include/lua5.1/luaconf.h
+	<limits.h>
+	<stddef.h>
+	<unistd.h>
+	<io.h>
+	<stdio.h>
+	<stdio.h>
+	<readline/readline.h>
+	<readline/history.h>
+	<assert.h>
+	<math.h>
+	<unistd.h>
+
+1198760545 /usr/include/lua5.1/lualib.h
+	"lua.h"
+
+1198760545 /usr/include/lua5.1/lauxlib.h
+	<stddef.h>
+	<stdio.h>
+	"lua.h"
+
+1329921096 /home/david/Development/mmorpg/include/objects.hpp
+	<string>
+	<algorithm>
+	<functional>
+	<map>
+	<sstream>
+	<ctime>
+	"entity.hpp"
+	"items.hpp"
+
+1327394171 /home/david/Development/mmorpg/include/lua.hpp
+	<lua.hpp>
+	<luabind/luabind.hpp>
+	<luabind/operator.hpp>
+	<luabind/dependency_policy.hpp>
+	<luabind/return_reference_to_policy.hpp>
+	"objects.hpp"
+	"actions.hpp"
+	"items.hpp"
+
+1334258164 /home/david/Development/mmorpg/include/actions.hpp
+	<map>
+	<boost/shared_ptr.hpp>
+	<string>
+	<utility>
+	<vector>
+	<deque>
+	<iostream>
+
+1329850974 /home/david/Development/mmorpg/include/items.hpp
+	<irrlicht/irrlicht.h>
+	<algorithm>
+	<list>
+	<iostream>
+	"entity.hpp"
+	"actions.hpp"
+
+1329918986 /home/david/Development/mmorpg/include/lua_manager.hpp
+	<lua.hpp>
+	<luabind/luabind.hpp>
+	<luabind/operator.hpp>
+	<luabind/dependency_policy.hpp>
+	<luabind/adopt_policy.hpp>
+	<luabind/return_reference_to_policy.hpp>
+	"objects.hpp"
+	"items.hpp"
+
+1329921293 /home/david/Development/mmorpg/include/entity.hpp
+	<irrlicht/irrlicht.h>
+	"actions.hpp"
+
+1334258148 source:/home/david/Development/mmorpg/src/objects.cpp
+	"objects.hpp"
+	"gui.hpp"
+
+1329228102 source:/home/david/Development/mmorpg/src/actions.cpp
+	"actions.hpp"
+	"objects.hpp"
+
+1334132427 /home/david/Development/mmorpg/include/map.hpp
+	<vector>
+	<sstream>
+	"astar/stlastar.h"
+	"entity.hpp"
+	"objects.hpp"
+
+1329308930 /home/david/Development/mmorpg/include/astar/stlastar.h
+	<iostream>
+	<stdio.h>
+	<assert.h>
+	<algorithm>
+	<set>
+	<vector>
+	"fsa.h"
+
+1329255444 /home/david/Development/mmorpg/include/astar/fsa.h
+	<string.h>
+	<stdio.h>
+
+1334132537 source:/home/david/Development/mmorpg/src/map.cpp
+	"map.hpp"
+	"gui.hpp"
+
+1329921298 source:/home/david/Development/mmorpg/src/entity.cpp
+	"entity.hpp"
+
+1334131726 /home/david/Development/mmorpg/include/graphics.hpp
+	<irrlicht/irrlicht.h>
+	<map>
+	<vector>
+	<string>
+	"map.hpp"
+
+1334131719 source:/home/david/Development/mmorpg/src/graphics.cpp
+	<cmath>
+	"graphics.hpp"
+	"boost/tuple/tuple.hpp"
+
+1329211152 /home/david/Development/mmorpg/include/eventreceiver.hpp
+	<irrlicht/irrlicht.h>
+	<iostream>
+	<sstream>
+
+1329904989 source:/home/david/Development/mmorpg/src/eventreceiver.cpp
+	"eventreceiver.hpp"
+	"gui.hpp"
+
+1329218443 /home/david/Development/mmorpg/include/guiinteractor.hpp
+	"objects.hpp"
+	"graphics.hpp"
+
+1329218554 source:/home/david/Development/mmorpg/src/guiinteractor.cpp
+	"guiinteractor.hpp"
+
+1350479187 /home/david/Development/mmorpg/include/gui.hpp
+	"objects.hpp"
+	"graphics.hpp"
+	"lua_manager.hpp"
+	"eventreceiver.hpp"
+	"CGUITTFont.h"
+
+1337180194 source:/home/david/Development/mmorpg/src/gui.cpp
+	"gui.hpp"
+	"boost/tuple/tuple.hpp"
+
+1329855680 source:/home/david/Development/mmorpg/src/CGUITTFont.cpp
+	<irrlicht/irrlicht.h>
+	"CGUITTFont.h"
+
+1329919417 /home/david/Development/mmorpg/include/CGUITTFont.h
+	<iostream>
+	<ft2build.h>
+	<freetype/freetype.h>
+	<irrlicht/irrlicht.h>
+

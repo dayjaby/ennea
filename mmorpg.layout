@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Release" />
+	<File name="examples.txt" open="0" top="0" tabpos="0">
+		<Cursor position="331" topLine="0" />
+	</File>
+	<File name="include/CGUITTFont.h" open="0" top="0" tabpos="0">
+		<Cursor position="277" topLine="0" />
+	</File>
+	<File name="include/actions.hpp" open="1" top="0" tabpos="8">
+		<Cursor position="604" topLine="5" />
+	</File>
+	<File name="include/astar/fsa.h" open="0" top="0" tabpos="14">
+		<Cursor position="2158" topLine="50" />
+	</File>
+	<File name="include/astar/stlastar.h" open="0" top="0" tabpos="13">
+		<Cursor position="5707" topLine="187" />
+	</File>
+	<File name="include/entity.hpp" open="1" top="0" tabpos="7">
+		<Cursor position="810" topLine="6" />
+	</File>
+	<File name="include/eventreceiver.hpp" open="0" top="0" tabpos="4">
+		<Cursor position="25" topLine="0" />
+	</File>
+	<File name="include/graphics.hpp" open="1" top="0" tabpos="1">
+		<Cursor position="798" topLine="5" />
+	</File>
+	<File name="include/gui.hpp" open="1" top="0" tabpos="4">
+		<Cursor position="1247" topLine="30" />
+	</File>
+	<File name="include/items.hpp" open="0" top="0" tabpos="5">
+		<Cursor position="263" topLine="0" />
+	</File>
+	<File name="include/lua_manager.hpp" open="0" top="0" tabpos="10">
+		<Cursor position="5516" topLine="141" />
+	</File>
+	<File name="include/map.hpp" open="1" top="0" tabpos="9">
+		<Cursor position="1962" topLine="53" />
+	</File>
+	<File name="include/objects.hpp" open="1" top="0" tabpos="6">
+		<Cursor position="3333" topLine="78" />
+	</File>
+	<File name="lua/actions.lua" open="0" top="0" tabpos="6">
+		<Cursor position="69" topLine="0" />
+	</File>
+	<File name="lua/containers.lua" open="0" top="0" tabpos="4">
+		<Cursor position="28" topLine="0" />
+	</File>
+	<File name="lua/core.lua" open="0" top="0" tabpos="6">
+		<Cursor position="168" topLine="0" />
+	</File>
+	<File name="lua/items.lua" open="0" top="0" tabpos="7">
+		<Cursor position="1292" topLine="6" />
+	</File>
+	<File name="lua/modules.lua" open="1" top="0" tabpos="12">
+		<Cursor position="818" topLine="0" />
+	</File>
+	<File name="lua/objects.lua" open="1" top="0" tabpos="13">
+		<Cursor position="432" topLine="0" />
+	</File>
+	<File name="lua/potions.lua" open="1" top="0" tabpos="14">
+		<Cursor position="1532" topLine="24" />
+	</File>
+	<File name="main.cpp" open="0" top="0" tabpos="8">
+		<Cursor position="77" topLine="0" />
+	</File>
+	<File name="shader/minimal.frag" open="0" top="0" tabpos="0">
+		<Cursor position="162" topLine="0" />
+	</File>
+	<File name="shader/minimal.vert" open="0" top="0" tabpos="0">
+		<Cursor position="155" topLine="0" />
+	</File>
+	<File name="src/CGUITTFont.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="4079" topLine="149" />
+	</File>
+	<File name="src/actions.cpp" open="0" top="0" tabpos="6">
+		<Cursor position="68" topLine="0" />
+	</File>
+	<File name="src/entity.cpp" open="1" top="0" tabpos="10">
+		<Cursor position="1429" topLine="42" />
+	</File>
+	<File name="src/eventreceiver.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="973" topLine="2" />
+	</File>
+	<File name="src/graphics.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="17" topLine="0" />
+	</File>
+	<File name="src/gui.cpp" open="1" top="1" tabpos="5">
+		<Cursor position="5599" topLine="111" />
+	</File>
+	<File name="src/map.cpp" open="1" top="0" tabpos="11">
+		<Cursor position="6939" topLine="169" />
+	</File>
+	<File name="src/objects.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="5860" topLine="180" />
+	</File>
+</CodeBlocks_layout_file>
