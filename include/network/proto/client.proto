@@ -1,0 +1,56 @@
+package Ennovia;
+
+// MESSAGE
+message TextMessage {
+    required string text = 1;
+}
+
+// GET_TILE_OPTIONLIST
+message GetTileOptionList {
+    required int32 map = 1;
+    required int32 x = 2;
+    required int32 y = 3;
+}
+
+// GET_LOCATABLE_OPTIONLIST
+message GetLocatableOptionList {
+    required int32 id = 1;
+}
+
+// CHOOSE_OPTION
+message ChooseOption {
+    required int32 optionlist = 1;
+    required int32 id = 2;
+}
+
+// GET_LOCATABLE_POSITION
+message GetLocatablePosition {
+    required int32 id = 1;
+}
+
+// GET_LOCATABLE_INTRODUCTION
+message GetLocatableIntroduction {
+    required int32 id = 1;
+}
+
+// WALK_TO
+message WalkTo {
+    required float x = 1;
+    required float y = 2;
+}
+
+
+// CREDENTIALS
+message Credentials {
+    required string username = 1;
+    required string password = 2;
+}
+
+// SEND_AES_KEY
+message SendAESKey {
+}
+
+// REQUEST_MAP
+message RequestMapData {
+    required int32 id = 1;
+}

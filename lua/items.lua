@@ -1,56 +1,39 @@
+itemtypes = {}
 
-class 'Bucket' (ItemType)
-function Bucket:__init()
-    ItemType.__init(self,"Bucket","media/coins.png")
-end
-function Bucket:onExamine(Item)
-    return "An old wooden bucket"
-end
-function Bucket:getOptionList(user,Item)
-    al = OptionList()
-    if(user:hasCurrentItem() and user.currentItem.type == ItemTypes["WaterBucket"]) then
-        al:add(CustomOption("Use Water Bucket on empty Bucket",
-            function(performer)
-                print("You filled the bucket with water")
-                user.currentItem:changeItemType(ItemTypes["Bucket"])
-                Item:changeItemType(Items["WaterBucket"])
-            end))
-    end
-    return al
+
+class 'ThrowAway' (Option)
+function ThrowAway:__init(item)
+  self.item = item
+  Option.__init(self)
 end
 
-class 'WaterBucket' (ItemType)
-function WaterBucket:__init()
-    ItemType.__init(self,"Water bucket","media/coins.png")
-end
-function WaterBucket:onExamine(Item)
-    return "A bucket filled with water"
-end
-function WaterBucket:getActionList(user,Item)
-    return OptionList():add(CustomOption("Empty bucket",
-                                function(performer)
-                                    print("You emptied the bucket")
-                                    Item:changeItemType(ItemTypes["Bucket"])
-                                end))
+function ThrowAway:getDescription()
+  return "Throw away!"
 end
 
-class 'Coins' (ItemType)
-function Coins:__init()
-    ItemType.__init(self,"Coins","media/coins.png")
-end
-function Coins:onExamine(item)
-    return 'coins'
+function ThrowAway:onChoose(player)
+  item.count = 0
 end
 
-class 'Knife' (ItemType)
-function Knife:__init()
-    ItemType.__init(self,"Knife","media/coins.png")
-end
-function Knife:onExamine(Item)
-    return "A rusty knife"
+
+class 'Coin' (ItemType)
+
+function Coin:__init()
+  ItemType.__init(self,"stdCoin","Coin","media/coins.png")
 end
 
-ItemTypes = { Bucket = Bucket(),
-          WaterBucket = WaterBucket(),
-          Coins = Coins()
-        }
+function Coin:isStackable()
+  return true
+end
+
+function Coin:onExamine()
+  return "Gold!!!"
+end
+
+function Coin:getOptionList(player,item)
+  ol = OptionList()
+  ol.add(ThrowAway(self))
+  return ol
+end
+
+itemtypes.stdCoin = Coin()

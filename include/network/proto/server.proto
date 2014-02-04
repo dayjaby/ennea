@@ -1,0 +1,77 @@
+package Ennovia;
+
+
+message NoData {
+}
+
+
+message OptionRef {
+    required int32 index = 1;
+    optional string description = 2;
+    required int32 optionList = 3; // server-side id
+}
+
+// SEND_MESSAGE
+message ServerMessage {
+    required string text = 1;
+}
+
+// SEND_TILE_OPTIONLIST
+message SendTileOptionList {
+    required int32 map = 1;
+    required int32 x = 2;
+    required int32 y = 3;
+    repeated OptionRef options = 4;
+}
+
+// SEND_LOCATABLE_OPTIONLIST
+message SendLocatableOptionList {
+    required int32 id = 1;
+    repeated OptionRef options = 2;
+}
+
+// MOVE_TO
+message MoveTo {
+    required int32 id = 1;
+    required float x = 2;
+    required float y = 3;
+}
+
+
+
+// SEND_RSA_KEY
+message SendRSAKey {
+}
+
+// YOU_ARE
+message YouAre {
+    required int32 id = 1;
+}
+
+// LOCATABLE_POSITION
+message LocatablePosition {
+    required int32 id = 1;
+    required int32 map = 2;
+    required float x = 3;
+    required float y = 4;
+}
+
+// INTRODUCE_LOCATABLE
+
+message IntroduceLocatable {
+    required int32 id = 1;
+    required int32 type = 2;
+    required string name = 3;
+    optional string model = 4;
+    optional string texture = 5;
+}
+
+//SEND_MAP
+message SendMapData {
+    required int32 id = 1;
+    required string path = 2;
+    required string heightmap = 3;
+    required int32 width = 4;
+    required int32 height = 5;
+}
+

@@ -1,0 +1,10 @@
+package Ennovia.DB;
+
+
+message Locatable {
+}
+
+
+message Player {
+
+}

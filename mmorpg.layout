@@ -1,97 +1,229 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Release" />
-	<File name="examples.txt" open="0" top="0" tabpos="0">
-		<Cursor position="331" topLine="0" />
+	<File name="src\network\client.cpp" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1799" topLine="57" />
+		</Cursor>
 	</File>
-	<File name="include/CGUITTFont.h" open="0" top="0" tabpos="0">
-		<Cursor position="277" topLine="0" />
+	<File name="src\network\connection.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="include/actions.hpp" open="1" top="0" tabpos="8">
-		<Cursor position="604" topLine="5" />
+	<File name="include\ui\eventreceiver.hpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="include/astar/fsa.h" open="0" top="0" tabpos="14">
-		<Cursor position="2158" topLine="50" />
+	<File name="include\misc\astar\stlastar.h" open="0" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="include/astar/stlastar.h" open="0" top="0" tabpos="13">
-		<Cursor position="5707" topLine="187" />
+	<File name="src\ui\eventreceiver.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="include/entity.hpp" open="1" top="0" tabpos="7">
-		<Cursor position="810" topLine="6" />
+	<File name="include\ui\graphics.hpp" open="0" top="0" tabpos="24" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="include/eventreceiver.hpp" open="0" top="0" tabpos="4">
-		<Cursor position="25" topLine="0" />
+	<File name="include\misc\irrlicht.hpp" open="0" top="0" tabpos="29" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="include/graphics.hpp" open="1" top="0" tabpos="1">
-		<Cursor position="798" topLine="5" />
+	<File name="src\ui\graphics.cpp" open="0" top="0" tabpos="25" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="include/gui.hpp" open="1" top="0" tabpos="4">
-		<Cursor position="1247" topLine="30" />
+	<File name="include\ui\render.hpp" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="include/items.hpp" open="0" top="0" tabpos="5">
-		<Cursor position="263" topLine="0" />
+	<File name="client.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="256" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="include/lua_manager.hpp" open="0" top="0" tabpos="10">
-		<Cursor position="5516" topLine="141" />
+	<File name="include\ui\windows\window.hpp" open="0" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="include/map.hpp" open="1" top="0" tabpos="9">
-		<Cursor position="1962" topLine="53" />
+	<File name="include\core.hpp" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="include/objects.hpp" open="1" top="0" tabpos="6">
-		<Cursor position="3333" topLine="78" />
+	<File name="src\ui\render.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="14852" topLine="373" />
+		</Cursor>
 	</File>
-	<File name="lua/actions.lua" open="0" top="0" tabpos="6">
-		<Cursor position="69" topLine="0" />
+	<File name="include\world\actions.hpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="555" topLine="29" />
+		</Cursor>
 	</File>
-	<File name="lua/containers.lua" open="0" top="0" tabpos="4">
-		<Cursor position="28" topLine="0" />
+	<File name="include\mayor.hpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2522" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="lua/core.lua" open="0" top="0" tabpos="6">
-		<Cursor position="168" topLine="0" />
+	<File name="src\world\actions.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="lua/items.lua" open="0" top="0" tabpos="7">
-		<Cursor position="1292" topLine="6" />
+	<File name="include\world\container.hpp" open="0" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="lua/modules.lua" open="1" top="0" tabpos="12">
-		<Cursor position="818" topLine="0" />
+	<File name="include\misc\registry.hpp" open="1" top="1" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="357" topLine="21" />
+		</Cursor>
 	</File>
-	<File name="lua/objects.lua" open="1" top="0" tabpos="13">
-		<Cursor position="432" topLine="0" />
+	<File name="include\world\database.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1210" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="lua/potions.lua" open="1" top="0" tabpos="14">
-		<Cursor position="1532" topLine="24" />
+	<File name="include\world\database.hpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="117" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="main.cpp" open="0" top="0" tabpos="8">
-		<Cursor position="77" topLine="0" />
+	<File name="include\world\entity.hpp" open="0" top="0" tabpos="23" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="shader/minimal.frag" open="0" top="0" tabpos="0">
-		<Cursor position="162" topLine="0" />
+	<File name="include\network\client.hpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="shader/minimal.vert" open="0" top="0" tabpos="0">
-		<Cursor position="155" topLine="0" />
+	<File name="include\world\factory.hpp" open="0" top="0" tabpos="32" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="src/CGUITTFont.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="4079" topLine="149" />
+	<File name="include\network\connection.hpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="src/actions.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="68" topLine="0" />
+	<File name="src\world\library.cpp" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="src/entity.cpp" open="1" top="0" tabpos="10">
-		<Cursor position="1429" topLine="42" />
+	<File name="include\world\items.hpp" open="0" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="src/eventreceiver.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="973" topLine="2" />
+	<File name="include\network\message.hpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="src/graphics.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="17" topLine="0" />
+	<File name="src\world\livingobject.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="src/gui.cpp" open="1" top="1" tabpos="5">
-		<Cursor position="5599" topLine="111" />
+	<File name="include\world\library.hpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="src/map.cpp" open="1" top="0" tabpos="11">
-		<Cursor position="6939" topLine="169" />
+	<File name="include\world\player.hpp" open="1" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="src/objects.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="5860" topLine="180" />
+	<File name="include\network\network.hpp" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="308" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\world\locatable.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="935" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="include\world\livingobject.hpp" open="0" top="0" tabpos="34" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\world\position.hpp" open="1" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\world\locatable.hpp" open="0" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\world\tile.hpp" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="398" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\world\map.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\world\map.hpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\network\proto\db.proto" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\world\object.hpp" open="0" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\network\proto\msg.proto" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\world\tile.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="lua\potions.lua" open="0" top="0" tabpos="35" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\network\proto\server.proto" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\mayor.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6764" topLine="0" />
+		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
